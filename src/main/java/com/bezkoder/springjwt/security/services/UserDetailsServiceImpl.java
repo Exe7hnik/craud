@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.bezkoder.springjwt.models.User;
 import com.bezkoder.springjwt.repository.UserRepository;
 
+import java.util.List;
+
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
   @Autowired
@@ -22,6 +24,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
 
     return UserDetailsImpl.build(user);
+  }
+
+  public List<User> getAllUsers() {
+    return userRepository.findAll();
   }
 
 }
